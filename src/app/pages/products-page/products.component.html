@@ -1,0 +1,10 @@
+<div>
+  Products
+  <ul>
+  @for (product of products(); track product.id) {
+    <li>{{ product.title }}</li>
+  } @empty {
+    <li>Загрузка...</li>
+  }
+</ul>
+</div>
