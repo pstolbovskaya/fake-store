@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<div class="paginator-container" *ngIf="totalPages() > 1">
+  <button
+    class="arrow"
+    (click)="pagePrev()"
+    [disabled]="currentPage() === 1">
+    &laquo;
+  </button>
 
-</body>
-</html>
+  <button
+    *ngFor="let page of pages()"
+    [class.active]="page === currentPage()"
+    (click)="selectPage(page)">
+    {{ page }}
+  </button>
+
+  <button
+    class="arrow"
+    (click)="pageNext()"
+    [disabled]="currentPage() === totalPages()">
+    &raquo;
+  </button>
+</div>
