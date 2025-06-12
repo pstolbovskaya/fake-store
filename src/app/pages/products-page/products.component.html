@@ -1,10 +1,8 @@
-<div>
+<div class="product-list">
   Products
-  <ul>
   @for (product of products(); track product.id) {
-    <li>{{ product.title }}</li>
+    <product [product]="product" ></product>
   } @empty {
-    <li>Загрузка...</li>
+    Загрузка...
   }
-</ul>
 </div>

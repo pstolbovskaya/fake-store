@@ -1,6 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -13,12 +14,17 @@ import {FormsModule} from '@angular/forms';
 
 export class LoginComponent {
   private authService = inject(AuthService);
+  private router: Router = inject(Router);
 
   credentials = {
     email: '',
     password: ''
   };
   errorMessage = '';
+
+  constructor() {
+    console.log(new Date(new Date().getTime() + 1749765652));
+  }
 
   onSubmit(): void {
     if (!this.credentials.email || !this.credentials.password) {
@@ -30,6 +36,7 @@ export class LoginComponent {
       if (!result) {
         this.errorMessage = 'Неверный логин или пароль.';
       }
+      this.router.navigate(['products']);
     });
   }
 }

@@ -1,0 +1,15 @@
+<div class="carousel-container" *ngIf="images && images.length > 0">
+  <div class="slide">
+    <img [src]="images[index]" alt="Carousel Image">
+  </div>
+  <button class="arrow prev" (click)="prevImage()">&#10094;</button>
+  <button class="arrow next" (click)="nextImage()">&#10095;</button>
+  <div class="dots-container">
+    <span
+      *ngFor="let image of images; let i = index"
+      class="dot"
+      [class.active]="i === index"
+      (click)="goToSlide(i)">
+    </span>
+  </div>
+</div>
