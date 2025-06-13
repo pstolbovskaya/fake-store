@@ -13,28 +13,29 @@ import {NgForOf, NgIf} from '@angular/common';
 
 export class PaginatorComponent {
   pageChange = output<number>()
-  currentPage = input(1);
+  currentPageIdx = input(0);
+  currentPage = computed(() => this.currentPageIdx() + 1);
   totalItems: InputSignal<number> = input.required();
   pageSize = input(10);
 
   totalPages = computed(() => {
-    return Math.ceil(this.totalItems() / this.pageSize());
+    return Math.ceil(this.totalItems() / this.pageSize() - 1);
   });
 
   pages:Signal<number[]> = computed(() => {
-    return Array.from({length: this.totalPages() });
+    return Array.from({length: this.totalPages() }, (_, i) => i+1);
   })
 
   selectPage(currentPage: number) {
-    if (currentPage >= 1 && currentPage <= this.totalPages() && currentPage <= this.currentPage()) {
+    if (currentPage >= 0 && currentPage < this.totalPages()) {
       this.pageChange.emit(currentPage);
     }
   }
   pagePrev() {
-    this.selectPage(this.currentPage() - 1);
+    this.selectPage(this.currentPageIdx() - 1);
   }
 
   pageNext() {
-    this.selectPage(this.currentPage() + 1);
+    this.selectPage(this.currentPageIdx() + 1);
   }
 }

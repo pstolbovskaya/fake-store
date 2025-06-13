@@ -2,7 +2,7 @@
   <button
     class="arrow"
     (click)="pagePrev()"
-    [disabled]="currentPage() === 1">
+    [disabled]="currentPageIdx() === 0">
     &laquo;
   </button>
 
@@ -16,7 +16,7 @@
   <button
     class="arrow"
     (click)="pageNext()"
-    [disabled]="currentPage() === totalPages()">
+    [disabled]="currentPageIdx() === totalPages() - 1">
     &raquo;
   </button>
 </div>

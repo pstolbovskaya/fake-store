@@ -1,9 +1,9 @@
-import {Component, inject, signal, Signal} from '@angular/core';
-import {AppService} from '../../app.service';
+import {Component, computed, effect, inject, signal, Signal, WritableSignal} from '@angular/core';
 import {Product} from '../../models/product.model';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {ProductComponent} from './product-component/product.component';
 import {PaginatorComponent} from '../../components/paginator/paginator.component';
+import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'app-products-page',
@@ -15,10 +15,25 @@ import {PaginatorComponent} from '../../components/paginator/paginator.component
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent {
-  private service = inject(AppService);
-  public products: Signal<Product[] | undefined> = signal<Product []| undefined>(undefined);
+  private productService = inject(ProductService);
+  public offset: Signal<number> = computed(() => this.currentPageIdx() * this.limit());
+  public limit: Signal<number> = signal(10);
+  public currentPageIdx: WritableSignal<number> = signal(0);
+  public products: WritableSignal<Product[]> = signal<Product[]>([]);
+  public totalAmount: Signal<Product[] | undefined> = toSignal(this.productService.getAllProducts());
 
   constructor() {
-    this.products = toSignal(this.service.getProducts());
+    effect(() => {
+      this.productService.getProducts(this.offset(), this.limit()).subscribe(products => this.products.set(products));
+    });
   }
+
+  onPageChanged(newPage: number): void {
+    console.log(newPage);
+
+    //this.offset()
+    this.currentPageIdx.set(newPage);
+
+  }
+
 }

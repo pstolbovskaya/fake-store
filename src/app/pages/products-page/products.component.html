@@ -1,3 +1,4 @@
+{{totalAmount()?.length}}
 <div class="product-list">
   Products
   @for (product of products(); track product.id) {
@@ -6,4 +7,7 @@
     Загрузка...
   }
 </div>
-<app-paginator [currentPage]="1" [pageSize]="10" [totalItems]="100"></app-paginator>
+<app-paginator (pageChange)="onPageChanged($event)"
+               [currentPageIdx]="currentPageIdx()"
+               [pageSize]="products()?.length?? 10"
+               [totalItems]="totalAmount()?.length ?? 0"></app-paginator>
