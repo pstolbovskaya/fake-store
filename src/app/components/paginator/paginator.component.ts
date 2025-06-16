@@ -19,10 +19,13 @@ export class PaginatorComponent {
   pageSize = input(10);
 
   totalPages = computed(() => {
+    if(!this.totalItems() || !this.pageSize()) return 0
     return Math.ceil(this.totalItems() / this.pageSize() - 1);
   });
 
   pages:Signal<number[]> = computed(() => {
+    console.log(this.totalPages());
+    if(!this.totalPages()) return [];
     return Array.from({length: this.totalPages() }, (_, i) => i+1);
   })
 

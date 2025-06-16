@@ -1,11 +1,17 @@
-{{totalAmount()?.length}}
-<div class="product-list">
+<div class="page">
   Products
-  @for (product of products(); track product.id) {
-    <product [product]="product" ></product>
-  } @empty {
-    Загрузка...
-  }
+  <div class="product-list">
+    @for (product of products(); track product.id) {
+      <product [product]="product"></product>
+    } @empty {
+      Загрузка...
+    }
+  </div>
+  <div class="category">
+    <aside class="category">
+      <categories (categoryChange)="onCategoryChange($event)"></categories>
+    </aside>
+  </div>
 </div>
 <app-paginator (pageChange)="onPageChanged($event)"
                [currentPageIdx]="currentPageIdx()"

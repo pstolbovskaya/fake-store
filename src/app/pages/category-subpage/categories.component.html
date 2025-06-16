@@ -1,0 +1,8 @@
+<div [formGroup]="formGroup">
+  @for (category of categories(); track category.id) {
+      <div>
+        <input type="radio" [value]="category.id.toString()" formControlName=hui>
+        <label>{{category.name}}</label>
+      </div>
+  }
+</div>

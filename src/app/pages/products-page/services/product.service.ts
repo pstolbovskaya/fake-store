@@ -1,8 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Product} from '../models/product.model';
-import {environment} from '../../environments/environment';
+import {Product} from '../../../models/product.model';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,11 @@ export class ProductService {
   //private products$: Observable<Product[]> = new BehaviorSubject<Product[]>([]);
   private productUrl: string = environment.apiUrl+'/products';
 
-  public getProducts(offset: number = 0, limit: number = 10):Observable<Product[]>  {
-      return this.http.get<Product[]>(`${this.productUrl}?offset=${offset}&limit=${limit}`);
+  public getProducts(offset: number = 0, limit: number = 10, category?: number ):Observable<Product[]>  {
+      return this.http.get<Product[]>(`${this.productUrl}?offset=${offset}&limit=${limit}&${category ? 'categoryId='+category : ''}`);
+  }
+  filterByCategory(categoryId: number): Observable<Product[]>  {
+    return this.http.get<Product[]>(`${this.productUrl}/?categoryId=${categoryId}`);
   }
 
   getAllProducts(): Observable<Product[]> {
