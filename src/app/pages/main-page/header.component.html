@@ -1,0 +1,11 @@
+<header class="header">
+  <button>Cart</button>
+  <button>Profile</button>
+  @if (authenticate()) {
+    <button (click)="logOut()">Log Out</button>
+  }
+  @else {
+    <button >Log In</button>
+  }
+
+</header>

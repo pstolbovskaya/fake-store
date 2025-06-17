@@ -1,14 +1,13 @@
-import {Component, computed, input, InputSignal, output, Signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, input, InputSignal, output, Signal} from '@angular/core';
 import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
   imports: [
-    NgIf,
-    NgForOf
   ],
-  styleUrls: ['./paginator.component.scss']
+  styleUrls: ['./paginator.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class PaginatorComponent {
@@ -24,7 +23,6 @@ export class PaginatorComponent {
   });
 
   pages:Signal<number[]> = computed(() => {
-    console.log(this.totalPages());
     if(!this.totalPages()) return [];
     return Array.from({length: this.totalPages() }, (_, i) => i+1);
   })

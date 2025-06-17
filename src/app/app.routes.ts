@@ -3,6 +3,7 @@ import {LoginComponent} from './pages/login-page/login.component';
 import {ProductsComponent} from './pages/products-page/products.component';
 import {authGuard} from './services/guards/auth.guard.service';
 import {NotFoundPageComponent} from './pages/not-found-page/not-found-page.component';
+import {ProductDetailsComponent} from './pages/product-details/product-details.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,10 @@ export const routes: Routes = [
     path: 'products',
     component: ProductsComponent,
     canActivate: [authGuard]
+  },
+  {
+    path: 'details/:id',
+    component: ProductDetailsComponent,
   },
   {
     path: '**',

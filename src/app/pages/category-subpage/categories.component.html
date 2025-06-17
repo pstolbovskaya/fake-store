@@ -1,4 +1,6 @@
-<div [formGroup]="formGroup">
+<div [formGroup]="formGroup" class="categories">
+  <h3>Categories</h3>
+  <button (click)="clearCategories()">Clear categories</button>
   @for (category of categories(); track category.id) {
       <div>
         <input type="radio" [value]="category.id.toString()" formControlName=hui>

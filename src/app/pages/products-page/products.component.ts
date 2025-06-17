@@ -1,4 +1,13 @@
-import {Component, computed, effect, inject, signal, Signal, WritableSignal} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+  Signal,
+  WritableSignal
+} from '@angular/core';
 import {Product} from '../../models/product.model';
 import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
 import {ProductComponent} from './product-component/product.component';
@@ -6,6 +15,7 @@ import {PaginatorComponent} from '../../components/paginator/paginator.component
 import {ProductService} from './services/product.service';
 import {CategoriesComponent} from '../category-subpage/categories.component';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {HeaderComponent} from '../main-page/header.component';
 
 @Component({
   selector: 'app-products-page',
@@ -13,9 +23,11 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
   imports: [
     ProductComponent,
     PaginatorComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    HeaderComponent
   ],
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsComponent {
   private productService = inject(ProductService);
@@ -34,7 +46,6 @@ export class ProductsComponent {
     });
 
     effect(() => {
-      console.log(this.router);
       this.router.navigate([], {
         relativeTo: this.activatedRoute,
         queryParams: {
@@ -46,47 +57,18 @@ export class ProductsComponent {
     })
 
     this.activatedRoute.queryParams.pipe(takeUntilDestroyed()).subscribe((params: Params): void => {
-      console.log(params);
       this.currentPageIdx.set(+params['page'] ? +params['page'] - 1 : 0);
-      this.category.set(+params['category'] ? +params['category'] : 0);
-    });
-  }
-
-  ngOnInit() {
-    this.router.navigate([], {
-      relativeTo: this.activatedRoute,
-      queryParams: {
-        page: this.currentPageIdx() + 1,
-        category: this.category(),
-      },
-      queryParamsHandling: 'merge',
+      this.category.set(+params['category'] ? +params['category'] : undefined);
     });
   }
 
   onCategoryChange(category: number): void {
-    // console.log(category);
     this.category.set(category);
-    // console.log(this.category());
-    //
-    // this.router.navigate([], {
-    //   relativeTo: this.activatedRoute,
-    //   queryParams: {
-    //     category: category,
-    //   },
-    //   queryParamsHandling: 'merge',
-    // });
+    this.currentPageIdx.set(0);
   }
 
   onPageChanged(newPage: number): void {
     this.currentPageIdx.set(newPage);
-    this.router.navigate([], {
-      relativeTo: this.activatedRoute,
-      queryParams: {
-        page: newPage + 1,
-        category: this.category(),
-      },
-      queryParamsHandling: 'merge',
-    });
   }
 
 }

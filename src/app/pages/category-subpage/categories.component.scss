@@ -1,0 +1,10 @@
+.categories {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: right;
+  align-items: flex-start;
+  width: 20rem;
+  border: black solid 1px;
+  font-size: 20px;
+}

@@ -28,7 +28,6 @@ export class AuthService {
   }
 
   private refreshAccessToken() {
-    console.log('Refresh access token');
     setTimeout(() => this.refreshToken().subscribe(), 15*60*1000);
   }
 
@@ -44,12 +43,10 @@ export class AuthService {
 
   refreshToken() {
     const refreshToken = localStorage.getItem(refreshTokenKey);
-    console.log('Refresh token');
 
     if (refreshToken) {
-      console.log('Refresh token ifed');
       return this.http.post<TokenResponse>(`${environment.apiUrl}/auth/refresh-token`, {refreshToken})
-        .pipe(this.handleResponse(()=> localStorage.removeItem(refreshTokenKey)));
+        .pipe(this.handleResponse(() => localStorage.removeItem(refreshTokenKey)));
     }
     return of(null);
   }

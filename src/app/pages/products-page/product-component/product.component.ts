@@ -1,8 +1,9 @@
 import {Product} from '../../../models/product.model';
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input, Input} from '@angular/core';
 import {CurrencyPipe, NgOptimizedImage} from '@angular/common';
 import {ProductImageCarouselComponent} from './product-image-carousel/product-image-carousel.component';
 import {CategoriesComponent} from '../../category-subpage/categories.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'product',
@@ -10,13 +11,12 @@ import {CategoriesComponent} from '../../category-subpage/categories.component';
   styleUrls: ['product.component.scss'],
   imports: [
     CurrencyPipe,
-    NgOptimizedImage,
     ProductImageCarouselComponent,
-    CategoriesComponent
-  ]
+    RouterLink,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ProductComponent {
-  @Input() product!: Product ;
-
+  product = input.required<Product>();
 }

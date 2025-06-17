@@ -1,0 +1,9 @@
+@if (product(); as product) {
+  <div>
+    <p>{{product.title}}</p>
+    <img [src]="product.images[0]" alt="product image">
+    <p>{{product.price | currency}}</p>
+    <p>{{product.description}}</p>
+    <button>Add to Cart</button>
+  </div>
+}

@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -9,7 +9,9 @@ import {Router} from '@angular/router';
   styleUrl: 'login.component.scss',
   imports: [
     FormsModule
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 
 export class LoginComponent {
@@ -23,7 +25,6 @@ export class LoginComponent {
   errorMessage = '';
 
   constructor() {
-    console.log(new Date(new Date().getTime() + 1749765652));
   }
 
   onSubmit(): void {

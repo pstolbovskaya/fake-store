@@ -1,22 +1,25 @@
-<div class="paginator-container" *ngIf="totalPages() > 1">
-  <button
-    class="arrow"
-    (click)="pagePrev()"
-    [disabled]="currentPageIdx() === 0">
-    &laquo;
-  </button>
+@if (totalPages() > 1) {
+  <div class="paginator-container">
+    <button
+      class="arrow"
+      (click)="pagePrev()"
+      [disabled]="currentPageIdx() === 0">
+      &laquo;
+    </button>
 
-  <button
-    *ngFor="let page of pages()"
-    [class.active]="page === currentPage()"
-    (click)="selectPage(page  - 1)">
-    {{ page }}
-  </button>
+    @for (page of pages(); track page) {
+      <button
+        [class.active]="page === currentPage()"
+        (click)="selectPage(page  - 1)">
+        {{ page }}
+      </button>
+    }
+    <button
+      class="arrow"
+      (click)="pageNext()"
+      [disabled]="currentPageIdx() === totalPages() - 1">
+      &raquo;
+    </button>
+  </div>
+}
 
-  <button
-    class="arrow"
-    (click)="pageNext()"
-    [disabled]="currentPageIdx() === totalPages() - 1">
-    &raquo;
-  </button>
-</div>
