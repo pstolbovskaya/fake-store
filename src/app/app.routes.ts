@@ -4,6 +4,7 @@ import {ProductsComponent} from './pages/products-page/products.component';
 import {authGuard} from './services/guards/auth.guard.service';
 import {NotFoundPageComponent} from './pages/not-found-page/not-found-page.component';
 import {ProductDetailsComponent} from './pages/product-details/product-details.component';
+import {CartPageComponent} from './pages/cart-page/cart-page.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,11 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'cart',
+    component: CartPageComponent,
+
+  },
+  {
     path: 'details/:id',
     component: ProductDetailsComponent,
   },
@@ -29,11 +35,4 @@ export const routes: Routes = [
     component: NotFoundPageComponent,
     title: 'Not Found',
   },
-  /*{
-    path: 'products-page/:id',
-
-  },
-  {
-    path: ''
-  }*/
 ];

@@ -1,0 +1,10 @@
+<app-header></app-header>
+@for (product of products(); track product.id) {
+  <div class="cart-item">
+    <img [src]="product.images[0]" alt="product image">
+    <p>{{product.title}}</p>
+    <p>{{product.price}}</p>
+  </div>
+
+}
+

@@ -1,11 +1,18 @@
 <header class="header">
-  <button>Cart</button>
-  <button>Profile</button>
-  @if (authenticate()) {
-    <button (click)="logOut()">Log Out</button>
-  }
-  @else {
-    <button >Log In</button>
-  }
-
+  <div class="page-navigate">
+    <a [routerLink]="['/products']">
+      <button class="page-navigate">Product List</button>
+    </a>
+  </div>
+  <div class="site-navigate">
+    <a [routerLink]="['/cart']">
+      <button>Cart {{ productsCount() }}</button>
+    </a>
+    <button>Profile</button>
+    @if (authenticate()) {
+      <button (click)="logOut()">Log Out</button>
+    } @else {
+      <button>Log In</button>
+    }
+  </div>
 </header>
