@@ -1,14 +1,15 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {FormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: 'login.component.html',
   styleUrl: 'login.component.scss',
   imports: [
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 
@@ -23,9 +24,6 @@ export class LoginComponent {
     password: ''
   };
   errorMessage = '';
-
-  constructor() {
-  }
 
   onSubmit(): void {
     if (!this.credentials.email || !this.credentials.password) {

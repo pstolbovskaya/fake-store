@@ -5,6 +5,7 @@ import {authGuard} from './services/guards/auth.guard.service';
 import {NotFoundPageComponent} from './pages/not-found-page/not-found-page.component';
 import {ProductDetailsComponent} from './pages/product-details/product-details.component';
 import {CartPageComponent} from './pages/cart-page/cart-page.component';
+import {RegistrationComponent} from './pages/registration-page/registration.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,10 @@ export const routes: Routes = [
   {
     path: 'details/:id',
     component: ProductDetailsComponent,
+  },
+  {
+    path: 'register',
+    component: RegistrationComponent,
   },
   {
     path: '**',
