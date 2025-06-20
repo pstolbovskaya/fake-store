@@ -29,6 +29,10 @@ export class UserService {
   }
 
   isEmailAvailable(email: string) {
-    return this.http.post<boolean>('https://api.escuelajs.co/api/v1/users/is-available', {email});
+    return this.http.post<AvailableEmail>('https://api.escuelajs.co/api/v1/users/is-available', {email});
   }
+}
+
+interface AvailableEmail {
+  isAvailable: boolean;
 }
