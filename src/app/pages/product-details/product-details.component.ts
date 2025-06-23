@@ -1,10 +1,9 @@
-import {ChangeDetectionStrategy, Component, inject, input, output, Signal} from '@angular/core';
-import {Product} from '../../models/product.model';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {CurrencyPipe} from '@angular/common';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {ProductService} from '../products-page/services/product.service';
 import {ActivatedRoute} from '@angular/router';
-import {CartService} from '../../stores/cart.service';
+import {CartService} from '../cart-page/services/cart.service';
 import {HeaderComponent} from '../main-page/header.component';
 
 @Component({

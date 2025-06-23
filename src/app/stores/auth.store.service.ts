@@ -2,6 +2,7 @@ import {computed, Injectable, Signal, signal, WritableSignal} from '@angular/cor
 import {TokenResponse} from '../models/user.model';
 
 export const refreshTokenKey = 'refreshToken';
+export const cartKey = 'cart';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class AuthStoreService {
   onLogout() {
     this.activeTokens.set(undefined);
     localStorage.removeItem(refreshTokenKey);
+    localStorage.removeItem(cartKey);
   }
 
 

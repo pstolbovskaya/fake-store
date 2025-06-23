@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, computed, inject} from '@angular/core';
 import {AuthStoreService} from '../../stores/auth.store.service';
 import {Router, RouterLink} from '@angular/router';
-import {CartService} from '../../stores/cart.service';
+import {CartService} from '../cart-page/services/cart.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
@@ -19,7 +19,7 @@ export class HeaderComponent {
   private authStoreService = inject(AuthStoreService);
   protected readonly authenticate = this.authStoreService.isAuthenticated;
   cartService: CartService = inject(CartService);
-  productsCount = computed( () => this.cartService.products().length);
+  productsCount = computed( () => this.cartService.totalCount());
 
   logOut(): void {
     this.authStoreService.onLogout();

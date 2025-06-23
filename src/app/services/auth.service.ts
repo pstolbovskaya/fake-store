@@ -39,6 +39,8 @@ export class AuthService {
 
   logout(): void {
     this.authStore.onLogout();
+
+    localStorage.removeItem('cart');
   }
 
   refreshToken() {

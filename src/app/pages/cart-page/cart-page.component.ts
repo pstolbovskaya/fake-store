@@ -1,6 +1,8 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {CartService} from '../../stores/cart.service';
+import {CartService} from './services/cart.service';
 import {HeaderComponent} from '../main-page/header.component';
+import {Product} from '../../models/product.model';
+import {cartKey} from '../../stores/auth.store.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,6 +16,13 @@ import {HeaderComponent} from '../main-page/header.component';
 
 export class CartPageComponent {
   cartService: CartService = inject(CartService);
-  protected products = this.cartService.products;
+  protected products = this.cartService.prod;
 
+  removeItemFromCart(product: Product) {
+    this.cartService.removeProductFromCart(product);
+  }
+
+  addItemToCart(product: Product) {
+    this.cartService.addProductToCart(product);
+  }
 }

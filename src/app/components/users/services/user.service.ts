@@ -31,8 +31,22 @@ export class UserService {
   isEmailAvailable(email: string) {
     return this.http.post<AvailableEmail>('https://api.escuelajs.co/api/v1/users/is-available', {email});
   }
+
+  uploadAvatar(binaryFile: { file: string | null }): Observable<FileUpload> {
+    return this.http.post<FileUpload>('https://api.escuelajs.co/api/v1/files/upload', {file: binaryFile});
+  }
+
+  getFile(fileName: string):Observable<any> {
+    return this.http.get(`https://api.escuelajs.co/api/v1/files/${fileName}`);
+  }
 }
 
 interface AvailableEmail {
   isAvailable: boolean;
+}
+
+interface FileUpload {
+  originalName: string;
+  filename: string;
+  location: string;
 }

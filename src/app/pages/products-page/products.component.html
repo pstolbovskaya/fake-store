@@ -15,5 +15,5 @@
 </div>
 <app-paginator (pageChange)="onPageChanged($event)"
                [currentPageIdx]="currentPageIdx()"
-               [pageSize]="products()?.length?? 10"
+               [pageSize]="products().length || 10"
                [totalItems]="totalAmount()?.length ?? 0"></app-paginator>

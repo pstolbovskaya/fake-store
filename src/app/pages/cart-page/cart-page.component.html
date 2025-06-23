@@ -1,9 +1,17 @@
 <app-header></app-header>
-@for (product of products(); track product.id) {
-  <div class="cart-item">
-    <img [src]="product.images[0]" alt="product image">
-    <p>{{product.title}}</p>
-    <p>{{product.price}}</p>
+@for (product of products(); track product) {
+  <div class="">
+    <div class="cart-item">
+      <img [src]="product.product.images[0]" alt="product image">
+    </div>
+    <p>{{ product.product.title }}</p>
+    <p>{{ product.product.price }}</p>
+    <div class="item-manipulation">
+      <button (click)="removeItemFromCart(product.product)">-</button>
+      <p>{{ product.count }}</p>
+      <button (click)="addItemToCart(product.product)">+</button>
+    </div>
+    <button (click)="removeItemFromCart(product.product)">Remove Item</button>
   </div>
 
 }

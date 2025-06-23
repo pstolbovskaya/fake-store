@@ -18,7 +18,11 @@ export class RegistrationComponent {
   private router: Router = inject(Router);
 
   credentials = new FormGroup({
-    name: new FormControl("", Validators.required),
+    name: new FormControl("", {
+      validators: Validators.required,
+      nonNullable: true,
+      },
+    ),
     email: new FormControl('', {
       validators: [Validators.required],
       updateOn: 'change',
@@ -40,7 +44,6 @@ export class RegistrationComponent {
   errorMessage = '';
 
   onSubmit(): void {
-
     if (this.credentials.errors) {
       this.errorMessage = 'error';
       return;
@@ -50,12 +53,20 @@ export class RegistrationComponent {
       return;
     }
 
-      this.userService.createUser("test", this.credentials.controls.email.value, this.credentials.controls.email.value).subscribe(result => {
-        if (!result) {
-          this.errorMessage = 'Что-то пошло не так :(';
-        }
-        this.router.navigate(['login']);
-      })
+    this.userService.uploadAvatar({file: this.credentials.controls.avatar.value});
+    //this.userService.getFile(filename);
+
+    this.userService.createUser(
+      this.credentials.controls.name.value,
+      this.credentials.controls.email.value,
+      this.credentials.controls.email.value,
+      //filename,
+      ).subscribe(result => {
+      if (!result) {
+        this.errorMessage = 'Что-то пошло не так :(';
+      }
+      this.router.navigate(['login']);
+    })
 
   }
 }
