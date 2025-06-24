@@ -2,7 +2,6 @@ import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {CartService} from './services/cart.service';
 import {HeaderComponent} from '../main-page/header.component';
 import {Product} from '../../models/product.model';
-import {cartKey} from '../../stores/auth.store.service';
 
 @Component({
   selector: 'app-cart',

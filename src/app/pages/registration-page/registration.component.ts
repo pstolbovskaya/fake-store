@@ -16,6 +16,7 @@ import {checkEmailAvailableValidator} from './validators/registration.validator'
 export class RegistrationComponent {
   private userService: UserService = inject(UserService);
   private router: Router = inject(Router);
+  private avatarLocation = '';
 
   credentials = new FormGroup({
     name: new FormControl("", {
@@ -41,6 +42,22 @@ export class RegistrationComponent {
     avatar: new FormControl('', Validators.required),
   });
 
+  ngOnInit() {
+    const file = document.getElementById('avatar') as HTMLInputElement;
+
+    file.addEventListener('change', event => {
+      const target = event.target as HTMLInputElement;
+      const files = target.files;
+
+      if (files) {
+        const formData = new FormData();
+        formData.append('file', files[0]);
+
+        this.userService.uploadAvatar(formData).subscribe(response => {
+          this.avatarLocation = response.location});
+      }
+    })
+  }
   errorMessage = '';
 
   onSubmit(): void {
@@ -53,14 +70,13 @@ export class RegistrationComponent {
       return;
     }
 
-    this.userService.uploadAvatar({file: this.credentials.controls.avatar.value});
     //this.userService.getFile(filename);
 
     this.userService.createUser(
       this.credentials.controls.name.value,
       this.credentials.controls.email.value,
-      this.credentials.controls.email.value,
-      //filename,
+      this.credentials.controls.password.value,
+      this.avatarLocation,
       ).subscribe(result => {
       if (!result) {
         this.errorMessage = 'Что-то пошло не так :(';

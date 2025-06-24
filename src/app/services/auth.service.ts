@@ -2,8 +2,9 @@ import {HttpClient} from '@angular/common/http';
 import {TokenResponse} from '../models/user.model';
 import {catchError, Observable, of, pipe, tap} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {AuthStoreService, refreshTokenKey} from '../stores/auth.store.service';
+import {AuthStoreService} from '../stores/auth.store.service';
 import {inject, Injectable} from '@angular/core';
+import {LocalStorageService, refreshTokenKey} from '../stores/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import {inject, Injectable} from '@angular/core';
 export class AuthService {
   private http: HttpClient = inject(HttpClient);
   private authStore: AuthStoreService = inject(AuthStoreService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   private handleResponse(errorCallback?: () => void) {
     return pipe(
@@ -40,15 +42,14 @@ export class AuthService {
   logout(): void {
     this.authStore.onLogout();
 
-    localStorage.removeItem('cart');
   }
 
   refreshToken() {
-    const refreshToken = localStorage.getItem(refreshTokenKey);
+    const refreshToken = this.localStorageService.getItemWithCheck(refreshTokenKey);
 
     if (refreshToken) {
       return this.http.post<TokenResponse>(`${environment.apiUrl}/auth/refresh-token`, {refreshToken})
-        .pipe(this.handleResponse(() => localStorage.removeItem(refreshTokenKey)));
+        .pipe(this.handleResponse(() => this.localStorageService.removeItem(refreshTokenKey)));
     }
     return of(null);
   }

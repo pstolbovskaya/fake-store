@@ -1,7 +1,6 @@
 <div class="product" xmlns="http://www.w3.org/1999/html">
-  <a [routerLink]="['/details', product().id]">{{product().title}}</a>
   <product-image-carousel [images]="product().images"></product-image-carousel>
-  <p>{{product().price | currency}}</p>
-  <p>{{product().category.name}}</p>
-
+  <span class="product_description"><a [routerLink]="['/details', product().id]">{{product().title}}</a></span>
+  <span class="product_description">{{product().price | currency}}</span>
+  <span class="product_description">{{product().category.name}}</span>
 </div>

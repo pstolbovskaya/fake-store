@@ -9,11 +9,12 @@
 }
 
 button {
-  background: none;
   border: none;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 22px;
   margin: 10px;
+  border-radius: 10px;
+  background-color: rgba(129, 61, 230, 0.5);
 }
 
 button:hover {

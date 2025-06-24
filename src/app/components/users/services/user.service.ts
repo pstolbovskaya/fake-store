@@ -32,8 +32,8 @@ export class UserService {
     return this.http.post<AvailableEmail>('https://api.escuelajs.co/api/v1/users/is-available', {email});
   }
 
-  uploadAvatar(binaryFile: { file: string | null }): Observable<FileUpload> {
-    return this.http.post<FileUpload>('https://api.escuelajs.co/api/v1/files/upload', {file: binaryFile});
+  uploadAvatar(binaryFile: FormData): Observable<FileUpload> {
+    return this.http.post<FileUpload>('https://api.escuelajs.co/api/v1/files/upload', binaryFile);
   }
 
   getFile(fileName: string):Observable<any> {
