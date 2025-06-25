@@ -17,7 +17,6 @@ export class CartService {
 
   constructor() {
     effect(() => {
-      console.log(this.products());
       const products = this.products();
       if (products.size) {
         this.localStorageService.setItem(cartKey, products);

@@ -1,14 +1,14 @@
 <app-header></app-header>
 @for (product of products(); track product) {
-  <div class="">
+  <div class="cart">
     <div class="cart-item">
       <img [src]="product.product.images[0]" alt="product image">
     </div>
-    <p>{{ product.product.title }}</p>
-    <p>{{ product.product.price }}</p>
+    <span>{{ product.product.title }}</span>
+    <span>{{ product.product.price | currency}}</span>
     <div class="item-manipulation">
       <button (click)="removeItemFromCart(product.product)">-</button>
-      <p>{{ product.count }}</p>
+      <span>{{ product.count }}</span>
       <button (click)="addItemToCart(product.product)">+</button>
     </div>
     <button (click)="removeItemFromCart(product.product)">Remove Item</button>

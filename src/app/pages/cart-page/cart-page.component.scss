@@ -1,13 +1,42 @@
 .cart-item {
   width: 200px;
   height: 200px;
+  border: 1px solid black;
+  border-radius: 20px;
+  overflow: hidden;
 
   img {
     width: 100%;
   }
 }
+.cart {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  text-align: left;
+}
 
 .item-manipulation {
   display: flex;
   flex-direction: row;
+  height: 32px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  gap: 15px;
 }
+
+button {
+  background-color: #ffffff;
+  padding: 8px 12px;
+  border: 1px solid rgb(129, 61, 230);
+  border-radius: 4px;
+  transition: background-color 0.2s;
+
+  :hover {
+    cursor: pointer;
+    background-color: rgba(129, 61, 230, 0.5);;
+  }
+}
+

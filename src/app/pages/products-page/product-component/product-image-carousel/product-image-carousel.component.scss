@@ -1,13 +1,14 @@
 .carousel-container {
   position: relative;
-  width: 100%;
+  width: var(--img-width);
+  height: var(--img-height);
   max-width: 800px;
   margin: auto;
   overflow: hidden; // Скрываем все, что выходит за пределы контейнера
 }
 
 .slide img {
-  width: 100%;
+  width: var(--img-width);
   display: block;
   border-radius: 8px;
 }
