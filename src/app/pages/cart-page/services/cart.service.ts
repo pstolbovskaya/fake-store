@@ -45,7 +45,7 @@ export class CartService {
     this.products().clear();
   }
 
-  removeProductFromCart(product: Product) {
+  decrementProductFromCart(product: Product) {
     this.products.update(value => {
       let count = value.get(product.id)?.count;
       if (count && count > 1) {
@@ -53,8 +53,14 @@ export class CartService {
       } else {
         value.delete(product.id);
       }
-
       return new Map(value);
+    })
+  }
+
+  removeProductFromCart(product: Product) {
+    this.products.update(value => {
+        value.delete(product.id);
+        return new Map(value);
     })
   }
 }

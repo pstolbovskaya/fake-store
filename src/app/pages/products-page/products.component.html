@@ -1,5 +1,8 @@
 <app-header></app-header>
 <div class="page">
+  <div class="country">
+    <app-country-dropdown></app-country-dropdown>
+  </div>
   <div class="product-list">
     @for (product of products(); track product.id) {
       <product [product]="product"></product>

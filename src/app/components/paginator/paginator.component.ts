@@ -1,4 +1,14 @@
-import {ChangeDetectionStrategy, Component, computed, input, InputSignal, output, Signal} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  InputSignal,
+  NgZone,
+  output,
+  Signal
+} from '@angular/core';
 import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
@@ -11,6 +21,9 @@ import {NgForOf, NgIf} from '@angular/common';
 })
 
 export class PaginatorComponent {
+
+  xone = inject(NgZone);
+
   pageChange = output<number>()
   currentPageIdx = input(0);
   currentPage = computed(() => this.currentPageIdx() + 1);
@@ -39,4 +52,5 @@ export class PaginatorComponent {
   pageNext() {
     this.selectPage(this.currentPageIdx() + 1);
   }
+
 }

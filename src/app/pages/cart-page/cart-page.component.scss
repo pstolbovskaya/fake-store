@@ -9,6 +9,7 @@
     width: 100%;
   }
 }
+
 .cart {
   padding: 12px;
   display: flex;
@@ -33,10 +34,10 @@ button {
   border: 1px solid rgb(129, 61, 230);
   border-radius: 4px;
   transition: background-color 0.2s;
+}
 
-  :hover {
-    cursor: pointer;
-    background-color: rgba(129, 61, 230, 0.5);;
-  }
+button:hover {
+  cursor: pointer;
+  background-color: rgba(129, 61, 230, 0.5);
 }
 

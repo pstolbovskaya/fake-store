@@ -1,0 +1,21 @@
+<mat-form-field>
+  <mat-label>Страна</mat-label>
+
+  <input
+    type="text"
+    matInput
+    [formControl]="countryControl"
+    [matAutocomplete]="auto"
+    placeholder="Начните поиск..."
+  />
+
+  <mat-autocomplete #auto="matAutocomplete">
+    @for (country of filteredCountries; track country.code) {
+
+      <mat-option>
+        {{ country.nameKey }}
+      </mat-option>
+    }
+  </mat-autocomplete>
+
+</mat-form-field>

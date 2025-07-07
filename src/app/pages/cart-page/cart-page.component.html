@@ -7,7 +7,7 @@
     <span>{{ product.product.title }}</span>
     <span>{{ product.product.price | currency}}</span>
     <div class="item-manipulation">
-      <button (click)="removeItemFromCart(product.product)">-</button>
+      <button (click)="decrementItemFromCart(product.product)">-</button>
       <span>{{ product.count }}</span>
       <button (click)="addItemToCart(product.product)">+</button>
     </div>

@@ -1,11 +1,12 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
-  inject,
+  effect, ElementRef,
+  inject, input, QueryList,
   signal,
-  Signal,
+  Signal, ViewChild, ViewChildren,
   WritableSignal
 } from '@angular/core';
 import {Product} from '../../models/product.model';
@@ -16,6 +17,9 @@ import {ProductService} from './services/product.service';
 import {CategoriesComponent} from '../category-subpage/categories.component';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {HeaderComponent} from '../main-page/header.component';
+import {Country, CountryService} from './services/country.service';
+import {ArrayFilterPipe} from './pipes/array-filter.pipe';
+import {CountryDropdownComponent} from '../../components/app-country-dropdown/app-country-dropdown';
 
 @Component({
   selector: 'app-products-page',
@@ -24,7 +28,9 @@ import {HeaderComponent} from '../main-page/header.component';
     ProductComponent,
     PaginatorComponent,
     CategoriesComponent,
-    HeaderComponent
+    HeaderComponent,
+    ArrayFilterPipe,
+    CountryDropdownComponent
   ],
   styleUrls: ['./products.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -39,8 +45,12 @@ export class ProductsComponent {
   public totalAmount: Signal<Product[] | undefined> = toSignal(this.productService.getAllProducts());
   public activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
+  private countryService = inject(CountryService);
 
+  /*public country: WritableSignal<string> = input('');
+  public countries: WritableSignal<Country[]> = this.countryService.getCountries();*/
   constructor() {
+
     effect(() => {
       this.productService.getProducts(this.offset(), this.limit(), this.category()).subscribe(products => this.products.set(products));
     });

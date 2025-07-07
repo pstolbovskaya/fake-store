@@ -19,6 +19,10 @@ export class CartPageComponent {
   cartService: CartService = inject(CartService);
   protected products = this.cartService.prod;
 
+  decrementItemFromCart(product: Product) {
+    this.cartService.decrementProductFromCart(product);
+  }
+
   removeItemFromCart(product: Product) {
     this.cartService.removeProductFromCart(product);
   }
