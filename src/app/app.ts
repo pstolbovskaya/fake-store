@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import {ProductsComponent} from './pages/products-page/products.component';
 import {AuthService} from './services/auth.service';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
@@ -11,4 +13,8 @@ import {AuthService} from './services/auth.service';
 })
 export class App {
   protected title = 'fake-store';
+  constructor(private translateService: TranslateService) {
+    translateService.setDefaultLang('en');
+  }
+
 }

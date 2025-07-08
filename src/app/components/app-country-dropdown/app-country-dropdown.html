@@ -1,3 +1,8 @@
+<select [(ngModel)]="selectedLanguage" (change)="onLanguageChange()">
+  <option value="en">English</option>
+  <option value="it">Italian</option>
+</select>
+
 <mat-form-field>
   <mat-label>Страна</mat-label>
 
@@ -7,13 +12,13 @@
     [formControl]="countryControl"
     [matAutocomplete]="auto"
     placeholder="Начните поиск..."
+    (input)="onInput($event)"
   />
 
-  <mat-autocomplete #auto="matAutocomplete">
-    @for (country of filteredCountries; track country.code) {
-
-      <mat-option>
-        {{ country.nameKey }}
+  <mat-autocomplete class="selection" #auto="matAutocomplete">
+    @for (country of filteredCountries(); track country.code) {
+      <mat-option class="country" [value]="country.nameKey | translate">
+        {{ country.nameKey | translate}}
       </mat-option>
     }
   </mat-autocomplete>

@@ -36,7 +36,6 @@ export const countries: Country[] = [
   { code: 'BM', nameKey: 'COUNTRY.BERMUDA' },
   { code: 'BT', nameKey: 'COUNTRY.BHUTAN' },
   { code: 'BO', nameKey: 'COUNTRY.BOLIVIA' },
-  { code: 'BQ', nameKey: 'COUNTRY.BONAIRE_SINT_EUSTATIUS_AND_SABA' },
   { code: 'BA', nameKey: 'COUNTRY.BOSNIA_AND_HERZEGOVINA' },
   { code: 'BW', nameKey: 'COUNTRY.BOTSWANA' },
   { code: 'BV', nameKey: 'COUNTRY.BOUVET_ISLAND' },
